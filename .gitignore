@@ -1,9 +1,11 @@
+proj.cmake/build
+build_test
+
 proj.android
 proj.emscripten
 proj.ios
 proj.macosx
 proj.win32
-proj.cmake/build
 
 # Compiled Object files
 *.slo
