@@ -7,6 +7,9 @@ proj.ios
 proj.macosx
 proj.win32
 
+# Vim temporary files
+*.swp
+
 # Compiled Object files
 *.slo
 *.lo
