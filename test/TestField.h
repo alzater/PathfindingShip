@@ -42,4 +42,53 @@ public:
         TS_ASSERT_EQUALS(field.hasBarrier(49, 49), false);
         TS_ASSERT_EQUALS(field.hasBarrier(2, 2), false);
     }
+
+    void testSettingBarriers(void)
+    {
+        Field field(3, 3);
+
+        field.setBarrier(2, 2);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 2), true);
+
+        field.setBarrier(1, 1);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 1), true);
+
+        field.setBarrier(0, 2);
+
+        TS_ASSERT_EQUALS(field.hasBarrier(0, 0), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(0, 1), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(0, 2), true);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 0), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 1), true);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 2), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 0), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 1), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 2), true);
+    }
+
+    void testRemovingBarriers(void)
+    {
+        Field field(3, 3);
+
+        field.setBarrier(2, 2);
+        field.setBarrier(1, 1);
+        field.setBarrier(0, 0);
+        field.setBarrier(0, 1);
+        field.setBarrier(0, 2);
+
+        field.removeBarrier(0, 2);
+        field.removeBarrier(1, 1);
+        field.removeBarrier(2, 2);
+
+
+        TS_ASSERT_EQUALS(field.hasBarrier(0, 0), true);
+        TS_ASSERT_EQUALS(field.hasBarrier(0, 1), true);
+        TS_ASSERT_EQUALS(field.hasBarrier(0, 2), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 0), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 1), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(1, 2), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 0), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 1), false);
+        TS_ASSERT_EQUALS(field.hasBarrier(2, 2), false);
+    }
 };
