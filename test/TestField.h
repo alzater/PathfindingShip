@@ -13,8 +13,6 @@ public:
         TS_ASSERT_EQUALS(field.getWidth(), 1);
         TS_ASSERT_EQUALS(field.getHeight(), 1);
         TS_ASSERT_EQUALS(field.hasBarrier(0, 0), false);
-
-        //TS_ASSERT_EQUALS(1, 1);
     }
 
     void testConstructor(void)

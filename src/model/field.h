@@ -1,4 +1,6 @@
 // field.h
+#ifndef FIELD_H
+#define FIELD_H
 
 #include <vector>
 
@@ -22,3 +24,6 @@ class Field
     private:
         std::vector<std::vector<int>> _barriers;
 };
+
+#endif
+

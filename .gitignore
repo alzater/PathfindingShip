@@ -1,5 +1,5 @@
 proj.cmake/build
-build_test
+test/build
 
 proj.android
 proj.emscripten
