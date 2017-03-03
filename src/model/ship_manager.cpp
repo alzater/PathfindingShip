@@ -11,7 +11,7 @@ ShipManager::ShipManager(const Field& field)
 
 ShipManager::Position ShipManager::getNewPosition(const ShipManager::Position& position, ShipManager::MOVEMENT movement) const
 {
-    assert( !position.isLegal );
+    assert( position.isLegal );
 
     switch( movement )
     {

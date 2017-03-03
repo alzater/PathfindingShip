@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir build
+mkdir build -p
 cd build
 
 cxxtestgen --error-printer -o runner.cpp ../TestShipManager.h

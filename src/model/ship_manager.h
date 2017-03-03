@@ -30,7 +30,6 @@ class ShipManager
         friend MOVEMENT operator*(MOVEMENT m) {return m;}
         friend MOVEMENT begin(MOVEMENT r) {return MOVEMENT::FIRST;}
         friend MOVEMENT end(MOVEMENT r)   {MOVEMENT l=MOVEMENT::LAST; return ++l;}
-        //std::vector<MOVEMENT> MOVEMENTS = {MOVEMENT::RIGHT, MOVEMENT::LEFT, MOVEMENT::UP, MOVEMENT::DOWN, MOVEMENT::ROTATE_RIGHT, MOVEMENT::ROTATE_LEFT};
 
     public:
         ShipManager(const Field& field);
