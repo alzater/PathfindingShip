@@ -219,4 +219,60 @@ public:
 
         TS_ASSERT_EQUALS( newPosition.isLegal, false);
     }
+
+    void testRotateLeftVertical()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, true, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_LEFT);
+
+        TS_ASSERT_EQUALS( newPosition.x, 2);
+        TS_ASSERT_EQUALS( newPosition.y, 1);
+        TS_ASSERT_EQUALS( newPosition.isVertical, false);
+        TS_ASSERT_EQUALS( newPosition.isLegal, true);
+    }
+
+    void testRotateRightVertical()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, true, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.x, 2);
+        TS_ASSERT_EQUALS( newPosition.y, 1);
+        TS_ASSERT_EQUALS( newPosition.isVertical, false);
+        TS_ASSERT_EQUALS( newPosition.isLegal, true);
+    }
+
+    void testRotateLeftHorisontal()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, false, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_LEFT);
+
+        TS_ASSERT_EQUALS( newPosition.x, 2);
+        TS_ASSERT_EQUALS( newPosition.y, 1);
+        TS_ASSERT_EQUALS( newPosition.isVertical, true);
+        TS_ASSERT_EQUALS( newPosition.isLegal, true);
+    }
+
+    void testRotateRightHorisontal()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, false, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.x, 2);
+        TS_ASSERT_EQUALS( newPosition.y, 1);
+        TS_ASSERT_EQUALS( newPosition.isVertical, true);
+        TS_ASSERT_EQUALS( newPosition.isLegal, true);
+    }
 };

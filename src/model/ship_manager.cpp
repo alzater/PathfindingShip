@@ -95,7 +95,7 @@ ShipManager::Position ShipManager::moveRotateRight(const Position& position) con
     else
     {
         if( sideDiagonalRotationCheck(position) )
-            return {position.x, position.y, false, true};
+            return {position.x, position.y, true, true};
         else
             return Position::illegal();
     }
@@ -113,7 +113,7 @@ ShipManager::Position ShipManager::moveRotateLeft(const Position& position) cons
     else
     {
         if( mainDiagonalRotationCheck(position) )
-            return {position.x, position.y, false, true};
+            return {position.x, position.y, true, true};
         else
             return Position::illegal();
     }
