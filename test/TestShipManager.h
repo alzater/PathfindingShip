@@ -275,4 +275,26 @@ public:
         TS_ASSERT_EQUALS( newPosition.isVertical, true);
         TS_ASSERT_EQUALS( newPosition.isLegal, true);
     }
+
+    void testRotateRightVerticalMinBorder()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {0, 1, true, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
+
+    void testRotateRightHorisontalMinBorder()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {1, 0, false, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
 };

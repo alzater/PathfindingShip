@@ -34,6 +34,7 @@ class ShipManager
     public:
         ShipManager(const Field& field);
 
+        bool goodPosition( const Position& position ) const;
         Position getNewPosition(const Position& position, MOVEMENT movement) const;
 
     private:

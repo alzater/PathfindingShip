@@ -32,24 +32,33 @@ int Field::getHeight() const
 
 void Field::setBarrier(int x, int y)
 {
-    assert(x >= 0 && x < _barriers.size());
-    assert(!_barriers.empty() && y >= 0 && y < _barriers[0].size());
+    if( x < 0 || x >= _barriers.size() )
+        return;
+
+    if( _barriers.empty() || y < 0 || y >= _barriers[0].size() )
+        return;
 
     _barriers[x][y] = true;
 }
 
 void Field::removeBarrier(int x, int y)
 {
-    assert(x >= 0 && x < _barriers.size());
-    assert(!_barriers.empty() && y >= 0 && y < _barriers[0].size());
+    if( x < 0 || x >= _barriers.size() )
+        return;
+
+    if( _barriers.empty() || y < 0 || y >= _barriers[0].size() )
+        return;
 
     _barriers[x][y] = false;
 }
 
 bool Field::hasBarrier(int x, int y) const
 {
-    assert(x >= 0 && x < _barriers.size());
-    assert(!_barriers.empty() && y >= 0 && y < _barriers[0].size());
+    if( x < 0 || x >= _barriers.size() )
+        return true;
+
+    if( _barriers.empty() || y < 0 || y >= _barriers[0].size() )
+        return true;
 
     return _barriers[x][y];
 }

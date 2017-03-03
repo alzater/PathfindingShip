@@ -9,6 +9,30 @@ ShipManager::ShipManager(const Field& field)
     : _field(field)
 {}
 
+bool ShipManager::goodPosition(const ShipManager::Position& position) const
+{
+    if( position.isVertical )
+    {
+        if( _field.hasBarrier(position.x, position.y) ||
+            _field.hasBarrier(position.x, position.y + 1) ||
+            _field.hasBarrier(position.x, position.y - 1)
+          )
+            return false;
+        else
+            return true;
+    }
+    else
+    {
+        if( _field.hasBarrier(position.x, position.y) ||
+            _field.hasBarrier(position.x - 1, position.y) ||
+            _field.hasBarrier(position.x + 1, position.y)
+          )
+            return false;
+        else
+            return true;
+    }
+}
+
 ShipManager::Position ShipManager::getNewPosition(const ShipManager::Position& position, ShipManager::MOVEMENT movement) const
 {
     assert( position.isLegal );
@@ -29,73 +53,70 @@ ShipManager::Position ShipManager::getNewPosition(const ShipManager::Position& p
 
 ShipManager::Position ShipManager::moveRight(const ShipManager::Position& position) const
 {
-    if( position.isVertical )
+    Position newPosition = position;
+    newPosition.x += 1;
+
+    if( position.isVertical || !goodPosition(position) || !goodPosition(newPosition) )
         return Position::illegal();
 
-    if( position.x >= _field.getWidth() - 2 )
-        return Position::illegal();
-
-    if( _field.hasBarrier( position.x + 2, position.y ) )
-        return Position::illegal();
-
-    return {position.x + 1, position.y, false, true};
+    return newPosition;
 }
 
 ShipManager::Position ShipManager::moveLeft(const ShipManager::Position& position) const
 {
-    if( position.isVertical )
+    Position newPosition = position;
+    newPosition.x -= 1;
+
+    if( position.isVertical || !goodPosition(position) || !goodPosition(newPosition) )
         return Position::illegal();
 
-    if( position.x <= 1 )
-        return Position::illegal();
-
-    if( _field.hasBarrier( position.x - 2, position.y ) )
-        return Position::illegal();
-
-    return {position.x - 1, position.y, false, true};
+    return newPosition;
 }
 
 ShipManager::Position ShipManager::moveUp(const ShipManager::Position& position) const
 {
-    if( !position.isVertical )
+    Position newPosition = position;
+    newPosition.y -= 1;
+
+    if( !position.isVertical || !goodPosition(position) || !goodPosition(newPosition) )
         return Position::illegal();
 
-    if( position.y <= 1 )
-        return Position::illegal();
-
-    if( _field.hasBarrier( position.x, position.y - 2 ) )
-        return Position::illegal();
-
-    return {position.x, position.y - 1, true, true};
+    return newPosition;
 }
 
 ShipManager::Position ShipManager::moveDown(const Position& position) const
 {
-    if( !position.isVertical )
+    Position newPosition = position;
+    newPosition.y += 1;
+
+    if( !position.isVertical || !goodPosition(position) || !goodPosition(newPosition) )
         return Position::illegal();
 
-    if( position.y >= _field.getWidth() - 2 )
-        return Position::illegal();
-
-    if( _field.hasBarrier( position.x, position.y + 2 ) )
-        return Position::illegal();
-
-    return {position.x, position.y + 1, true, true};
+    return newPosition;
 }
 
 ShipManager::Position ShipManager::moveRotateRight(const Position& position) const
 {
+    if( !goodPosition(position) )
+        return Position::illegal();
+
+    Position newPosition = position;
+    newPosition.isVertical = !position.isVertical;
+
+    if( !goodPosition(newPosition) )
+        return Position::illegal();
+
     if( position.isVertical )
     {
         if( mainDiagonalRotationCheck(position) )
-            return {position.x, position.y, false, true};
+            return newPosition;
         else
             return Position::illegal();
     }
     else
     {
         if( sideDiagonalRotationCheck(position) )
-            return {position.x, position.y, true, true};
+            return newPosition;
         else
             return Position::illegal();
     }
@@ -103,17 +124,26 @@ ShipManager::Position ShipManager::moveRotateRight(const Position& position) con
 
 ShipManager::Position ShipManager::moveRotateLeft(const Position& position) const
 {
+    if( !goodPosition(position) )
+        return Position::illegal();
+
+    Position newPosition = position;
+    newPosition.isVertical = !position.isVertical;
+
+    if( !goodPosition(newPosition) )
+        return Position::illegal();
+
     if( position.isVertical )
     {
         if( sideDiagonalRotationCheck(position) )
-            return {position.x, position.y, false, true};
+            return newPosition;
         else
             return Position::illegal();
     }
     else
     {
         if( mainDiagonalRotationCheck(position) )
-            return {position.x, position.y, true, true};
+            return newPosition;
         else
             return Position::illegal();
     }
@@ -121,12 +151,9 @@ ShipManager::Position ShipManager::moveRotateLeft(const Position& position) cons
 
 bool ShipManager::mainDiagonalRotationCheck(const ShipManager::Position& position) const
 {
-    if( _field.hasBarrier( position.x, position.y + 1) ||
-        _field.hasBarrier( position.x + 1, position.y + 1) ||
-        _field.hasBarrier( position.x + 1, position.y) ||
-        _field.hasBarrier( position.x - 1, position.y) ||
-        _field.hasBarrier( position.x - 1, position.y - 1) ||
-        _field.hasBarrier( position.x, position.y - 1) )
+    if( _field.hasBarrier( position.x + 1, position.y + 1) ||
+        _field.hasBarrier( position.x - 1, position.y - 1)
+      )
         return false;
 
     return true;
@@ -134,12 +161,9 @@ bool ShipManager::mainDiagonalRotationCheck(const ShipManager::Position& positio
 
 bool ShipManager::sideDiagonalRotationCheck(const ShipManager::Position& position) const
 {
-    if( _field.hasBarrier( position.x, position.y + 1) ||
-        _field.hasBarrier( position.x - 1, position.y + 1) ||
-        _field.hasBarrier( position.x + 1, position.y) ||
-        _field.hasBarrier( position.x - 1, position.y) ||
-        _field.hasBarrier( position.x + 1, position.y - 1) ||
-        _field.hasBarrier( position.x, position.y - 1) )
+    if( _field.hasBarrier( position.x - 1, position.y + 1) ||
+        _field.hasBarrier( position.x + 1, position.y - 1)
+      )
         return false;
 
     return true;
