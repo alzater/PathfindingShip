@@ -1,8 +1,9 @@
 // TestShipManager.h
 #include <cxxtest/TestSuite.h>
 
-#include "../src/model/ship_manager.cpp"
-#include "../src/model/field.cpp"
+#include "../src/model/ship_manager.h"
+#include "../src/model/field.h"
+
 
 class TestShipManager : public CxxTest::TestSuite
 {

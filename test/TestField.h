@@ -1,7 +1,7 @@
 // TestField.h
 #include <cxxtest/TestSuite.h>
 
-#include "../src/model/field.cpp"
+#include "../src/model/field.h"
 
 class TestField : public CxxTest::TestSuite
 {
