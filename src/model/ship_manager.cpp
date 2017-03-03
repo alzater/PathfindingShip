@@ -108,14 +108,14 @@ ShipManager::Position ShipManager::moveRotateRight(const Position& position) con
 
     if( position.isVertical )
     {
-        if( mainDiagonalRotationCheck(position) )
+        if( sideDiagonalRotationCheck(position) )
             return newPosition;
         else
             return Position::illegal();
     }
     else
     {
-        if( sideDiagonalRotationCheck(position) )
+        if( mainDiagonalRotationCheck(position) )
             return newPosition;
         else
             return Position::illegal();
@@ -135,14 +135,14 @@ ShipManager::Position ShipManager::moveRotateLeft(const Position& position) cons
 
     if( position.isVertical )
     {
-        if( sideDiagonalRotationCheck(position) )
+        if( mainDiagonalRotationCheck(position) )
             return newPosition;
         else
             return Position::illegal();
     }
     else
     {
-        if( mainDiagonalRotationCheck(position) )
+        if( sideDiagonalRotationCheck(position) )
             return newPosition;
         else
             return Position::illegal();

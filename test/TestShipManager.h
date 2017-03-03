@@ -297,4 +297,77 @@ public:
 
         TS_ASSERT_EQUALS( newPosition.isLegal, false);
     }
+
+    void testRotateRightVerticalMaxBorder()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {3, 1, true, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
+
+    void testRotateRightHorisontalMaxBorder()
+    {
+        Field field(4, 4);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {1, 3, false, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
+
+    void testRotateLeftVerticalBarrier()
+    {
+        Field field(4, 4);
+        field.setBarrier(1, 1);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, true, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_LEFT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
+
+    void testRotateRightVerticalBarrier()
+    {
+        Field field(4, 4);
+        field.setBarrier(3, 0);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, true, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
+
+    void testRotateLeftHorisontalBarrier()
+    {
+        Field field(4, 4);
+        field.setBarrier(3, 2);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 1, false, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_LEFT);
+
+        TS_ASSERT_EQUALS( newPosition.x, 2);
+        TS_ASSERT_EQUALS( newPosition.y, 1);
+        TS_ASSERT_EQUALS( newPosition.isVertical, true);
+        TS_ASSERT_EQUALS( newPosition.isLegal, true);
+    }
+
+    void testRotateRightHorisontalBarrier()
+    {
+        Field field(4, 4);
+        field.setBarrier(3, 3);
+        ShipManager shm(field);
+        ShipManager::Position startPosition = {2, 2, false, true};
+
+        auto newPosition = shm.getNewPosition(startPosition, ShipManager::MOVEMENT::ROTATE_RIGHT);
+
+        TS_ASSERT_EQUALS( newPosition.isLegal, false);
+    }
 };
