@@ -11,6 +11,9 @@ ShipManager::ShipManager(const Field& field)
 
 bool ShipManager::goodPosition(const ShipManager::Position& position) const
 {
+    if( !position.isLegal )
+        return false;
+
     if( position.isVertical )
     {
         if( _field.hasBarrier(position.x, position.y) ||
@@ -167,5 +170,15 @@ bool ShipManager::sideDiagonalRotationCheck(const ShipManager::Position& positio
         return false;
 
     return true;
+}
+
+std::pair<int, int> ShipManager::getFieldSize() const
+{
+    std::pair<int, int> size;
+
+    size.first = _field.getWidth();
+    size.second = _field.getHeight();
+
+    return size;
 }
 

@@ -1,4 +1,7 @@
 // ship_manager.h
+#ifndef SHIP_MANAGER_H
+#define SHIP_MANAGER_H
+
 #include <vector>
 
 class Field;
@@ -13,7 +16,11 @@ class ShipManager
             bool isLegal = false;
 
             static Position illegal() { return {-1, -1, false, false}; };
+
+            static int toInt(const Position& pos) { return pos.x + pos.y * 100 + 10000*( pos.isVertical ? 1 : 0 ); }
         };
+        friend bool operator<(const Position& lhs, const Position& rhs) { return Position::toInt(lhs) < Position::toInt(rhs); }
+        friend bool operator==(const Position& lhs, const Position& rhs) { return Position::toInt(lhs) == Position::toInt(rhs); }
 
         enum class MOVEMENT
         {
@@ -37,6 +44,8 @@ class ShipManager
         bool goodPosition( const Position& position ) const;
         Position getNewPosition(const Position& position, MOVEMENT movement) const;
 
+        std::pair<int, int> getFieldSize() const;
+
     private:
         Position moveRight(const Position& position) const;
         Position moveLeft(const Position& position) const;
@@ -51,4 +60,6 @@ class ShipManager
     private:
         const Field& _field;
 };
+
+#endif
 
