@@ -6,6 +6,7 @@
 #include <set>
 #include <map>
 #include <queue>
+#include <algorithm>
 
 Pathfinder::Pathfinder(const ShipManager& shipManager)
     : _shipManager(shipManager)
@@ -85,6 +86,7 @@ std::vector<ShipManager::MOVEMENT> Pathfinder::getPath( bool& error )
         position = state.first;
         result.push_back(state.second);
     }
+    std::reverse(result.begin(), result.end());
 
     error = false;
     return result;
