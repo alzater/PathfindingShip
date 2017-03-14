@@ -5,8 +5,9 @@
 
 #include <iostream>
 
-View::View(int columns, int rows)
-    : _columns(columns)
+View::View(IPresenter* presenter, int columns, int rows)
+    : _presenter(presenter)
+    , _columns(columns)
     , _rows(rows)
 {
     initField();
@@ -32,11 +33,6 @@ void View::initField()
             addChild(_field[i][j]);
         }
     }
-
-    _field[2][5]->setRock();
-    _field[3][2]->setRock();
-    _field[3][6]->setRock();
-    _field[8][2]->setRock();
 }
 
 void View::cellClick(Event* e, int column, int row)
@@ -57,11 +53,17 @@ void View::cellClick(Event* e, int column, int row)
 
 bool View::cellClickLeft(int column, int row)
 {
-    return false;
+    if( _modifyMode )
+        return _presenter->setBarrier(column, row);
+    else
+        return _presenter->setShipStartPosition(column, row);
 }
 
 bool View::cellClickRight(int column, int row)
 {
-    return false;
+    if( _modifyMode )
+        return _presenter->removeBarrier(column, row);
+    else
+        return _presenter->setShipEndPosition(column, row);
 }
 

@@ -13,11 +13,11 @@ class Model
         void setObserver(ModelObserver& observer);
         void removeObserver(ModelObserver& observer);
 
-        bool setShipStartPosition(const std::pair<int, int>& position);
-        bool setShipEndPosition(const std::pair<int, int>& position);
+        bool setShipStartPosition(int x, int y);
+        bool setShipEndPosition(int x, int y);
 
-        bool setBarrier(const std::pair<int, int>& position);
-        bool removeBarrier(const std::pair<int, int>& position);
+        bool setBarrier(int x, int y);
+        bool removeBarrier(int x, int y);
 
         std::vector<std::tuple<int, int, bool>> getShipPath();
 

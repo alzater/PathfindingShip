@@ -16,20 +16,24 @@ void Model::removeObserver(ModelObserver& observer)
 {
 }
 
-bool Model::setShipStartPosition(const std::pair<int, int>& position)
+bool Model::setShipStartPosition(int x, int y)
 {
+    return false;
 }
 
-bool Model::setShipEndPosition(const std::pair<int, int>& position)
+bool Model::setShipEndPosition(int x, int y)
 {
+    return false;
 }
 
-bool Model::setBarrier(const std::pair<int, int>& position)
+bool Model::setBarrier(int x, int y)
 {
+    return false;
 }
 
-bool Model::removeBarrier(const std::pair<int, int>& position)
+bool Model::removeBarrier(int x, int y)
 {
+    return false;
 }
 
 std::vector<std::tuple<int, int, bool>> Model::getShipPath()

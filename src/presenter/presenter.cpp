@@ -3,7 +3,7 @@
 
 Presenter::Presenter(spActor scene, std::pair<int, int> fieldSize)
     : _model(fieldSize.first, fieldSize.second)
-    , _view(fieldSize.first, fieldSize.second)
+    , _view(this, fieldSize.first, fieldSize.second)
 {
     _model.setObserver(*this);
 
@@ -16,24 +16,24 @@ Presenter::~Presenter()
     _model.removeObserver(*this);
 }
 
-bool Presenter::setShipStartPosition(const std::pair<int, int>& position)
+bool Presenter::setShipStartPosition(int x, int y)
 {
-    return _model.setShipStartPosition(position);
+    return _model.setShipStartPosition(x, y);
 }
 
-bool Presenter::setShipEndPosition(const std::pair<int, int>& position)
+bool Presenter::setShipEndPosition(int x, int y)
 {
-    return _model.setShipEndPosition(position);
+    return _model.setShipEndPosition(x, y);
 }
 
-bool Presenter::setBarrier(const std::pair<int, int>& position)
+bool Presenter::setBarrier(int x, int y)
 {
-    return _model.setBarrier(position);
+    return _model.setBarrier(x, y);
 }
 
-bool Presenter::removeBarrier(const std::pair<int, int>& position)
+bool Presenter::removeBarrier(int x, int y)
 {
-    return _model.removeBarrier(position);
+    return _model.removeBarrier(x, y);
 }
 
 std::vector<std::tuple<int, int, bool>> Presenter::getShipPath()
@@ -41,17 +41,17 @@ std::vector<std::tuple<int, int, bool>> Presenter::getShipPath()
     return _model.getShipPath();
 }
 
-void Presenter::updatedCell(const std::pair<int, int>& position, bool hasBarrier)
+void Presenter::updatedCell(int x, int y, bool hasBarrier)
 {
     // TODO
 }
 
-void Presenter::updatedShipStartPosition(const std::pair<int, int>& position)
+void Presenter::updatedShipStartPosition(int x, int y, bool isVertical)
 {
     // TODO
 }
 
-void Presenter::updatedShipEndPosition(const std::pair<int, int>& position)
+void Presenter::updatedShipEndPosition(int x, int y, bool isVertical)
 {
     // TODO
 }

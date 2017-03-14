@@ -1,5 +1,6 @@
 // view.h
 
+#include "../presenter/ipresenter.h"
 #include "cell.h"
 
 #include "oxygine-framework.h"
@@ -11,7 +12,7 @@ using namespace oxygine;
 class View : public Actor
 {
     public:
-        View(int columns, int rows);
+        View(IPresenter* presenter, int columns, int rows);
         virtual ~View();
 
     private:
@@ -22,6 +23,7 @@ class View : public Actor
         bool cellClickRight(int column, int row);
 
     private:
+        IPresenter* _presenter;
         std::vector<std::vector<spCell>> _field;
         //spShip _ship;
         //spButton _editButton;
@@ -31,6 +33,8 @@ class View : public Actor
         float _cellSize;
         const int MAX_WIDTH  = 600;
         const int MAX_HEIGHT = 600;
+
+        bool _modifyMode = false;
 };
 
 DECLARE_SMART(View, spView)

@@ -19,18 +19,18 @@ class Presenter : public IPresenter, public ModelObserver
 
     private:
         // IPresenter
-        virtual bool setShipStartPosition(const std::pair<int, int>& position) override;
-        virtual bool setShipEndPosition(const std::pair<int, int>& position) override;
+        virtual bool setShipStartPosition(int x, int y) override;
+        virtual bool setShipEndPosition(int x, int y) override;
 
-        virtual bool setBarrier(const std::pair<int, int>& position) override;
-        virtual bool removeBarrier(const std::pair<int, int>& position) override;
+        virtual bool setBarrier(int x, int y) override;
+        virtual bool removeBarrier(int x, int y) override;
 
         virtual std::vector<std::tuple<int, int, bool>> getShipPath() override;
 
         // ModelObserver
-        virtual void updatedCell(const std::pair<int, int>& position, bool hasBarrier) override;
-        virtual void updatedShipStartPosition(const std::pair<int, int>& position) override;
-        virtual void updatedShipEndPosition(const std::pair<int, int>& position) override;
+        virtual void updatedCell(int x, int y, bool hasBarrier) override;
+        virtual void updatedShipStartPosition(int x, int y, bool isVertical) override;
+        virtual void updatedShipEndPosition(int x, int y, bool isVertical) override;
 
     private:
         View _view;
