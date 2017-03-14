@@ -5,7 +5,7 @@
 class Model
 {
     public:
-        Model();
+        Model(int x, int y);
 
         void setObserver(ModelObserver& observer);
         void removeObserver(ModelObserver& observer);
@@ -26,5 +26,4 @@ class Model
         ShipManager _shipManager;
         Pathfinder _pathfinder;
 };
-
 

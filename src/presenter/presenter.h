@@ -1,5 +1,9 @@
 // presenter.h
+
 #include "ipresenter.h"
+#include "../model/model_observer.h"
+#include "../model/model.h"
+#include "../view/view.h"
 
 #include "oxygine-framework.h"
 
