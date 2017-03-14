@@ -41,14 +41,27 @@ void View::initField()
 
 void View::cellClick(Event* e, int column, int row)
 {
-    std::cout << "click " << column << ' ' << row << std::endl;
+    TouchEvent* event = dynamic_cast<TouchEvent*>(e);
+    if( event == nullptr )
+        return;
+
+    bool result = false;
+    if( event->mouseButton == MouseButton_Left )
+        result = cellClickLeft(column, row);
+    else if( event->mouseButton == MouseButton_Right )
+        result = cellClickRight(column, row);
+
+    if( !result )
+        _field[column][row]->addTween(ColorRectSprite::TweenColor(Color(255, 0, 0)), 1000, 1, true, Tween:: ease_inOutQuad);
 }
 
 bool View::cellClickLeft(int column, int row)
 {
+    return false;
 }
 
 bool View::cellClickRight(int column, int row)
 {
+    return false;
 }
 
