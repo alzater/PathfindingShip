@@ -1,4 +1,6 @@
 // presenter.h
+#ifndef PRESENTER_H
+#define PRESENTER_H
 
 #include "ipresenter.h"
 #include "../model/model_observer.h"
@@ -34,3 +36,6 @@ class Presenter : public IPresenter, public ModelObserver
         View _view;
         Model _model;
 };
+
+#endif
+

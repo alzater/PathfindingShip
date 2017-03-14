@@ -1,6 +1,9 @@
 // model.h
-
 #include "model_observer.h"
+
+#include "field.h"
+#include "ship_manager.h"
+#include "pathfinder.h"
 
 class Model
 {
