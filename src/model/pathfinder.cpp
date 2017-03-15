@@ -8,45 +8,23 @@
 #include <queue>
 #include <algorithm>
 
-Pathfinder::Pathfinder(const ShipManager& shipManager)
+Pathfinder::Pathfinder(const ShipManager& shipManager, const Ship& ship)
     : _shipManager(shipManager)
-{
-    _startPosition = ShipManager::Position::illegal();
-    _endPosition = ShipManager::Position::illegal();
-}
-
-bool Pathfinder::setStartPosition(const ShipManager::Position& startPosition)
-{
-    if( !_shipManager.goodPosition(startPosition) || startPosition == _endPosition )
-        return false;
-
-    _startPosition = startPosition;
-
-    return true;
-}
-
-bool Pathfinder::setEndPosition(const ShipManager::Position& endPosition)
-{
-    if( !_shipManager.goodPosition(endPosition) || endPosition == _startPosition)
-        return false;
-
-    _endPosition = endPosition;
-
-    return true;
-}
+    , _ship(ship)
+{}
 
 std::vector<ShipManager::MOVEMENT> Pathfinder::getPath( bool& error )
 {
     error = true;
-    if( !_shipManager.goodPosition(_startPosition) || !_shipManager.goodPosition(_endPosition) )
+    if( !_ship.checkStartPosition() || !_ship.checkEndPosition() )
         return {};
 
     std::set<ShipManager::Position> visitedPositions;
     std::queue<ShipManager::Position> positionsQueue;
     std::map<ShipManager::Position, std::pair<ShipManager::Position, ShipManager::MOVEMENT>> parents;
 
-    positionsQueue.push(_startPosition);
-    visitedPositions.insert(_startPosition);
+    positionsQueue.push(_ship.getStartPosition());
+    visitedPositions.insert(_ship.getStartPosition());
 
     bool gained = false;
     while( !positionsQueue.empty() )
@@ -67,7 +45,7 @@ std::vector<ShipManager::MOVEMENT> Pathfinder::getPath( bool& error )
             visitedPositions.insert(newPosition);
             parents.insert( std::make_pair( newPosition, std::make_pair(position, movement) ) );
 
-            if( newPosition == _endPosition )
+            if( newPosition == _ship.getEndPosition() )
                 gained = true;
         }
 
@@ -79,8 +57,8 @@ std::vector<ShipManager::MOVEMENT> Pathfinder::getPath( bool& error )
         return {};
 
     std::vector<ShipManager::MOVEMENT> result;
-    auto position = _endPosition;
-    while( !(position == _startPosition) )
+    auto position = _ship.getEndPosition();
+    while( !(position == _ship.getStartPosition()) )
     {
         auto state = parents[position];
         position = state.first;

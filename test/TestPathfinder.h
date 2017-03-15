@@ -34,10 +34,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {2, 1, true, true};
         ShipManager::Position endPosition = {2, 2, true, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -52,10 +53,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {2, 1, true, true};
         ShipManager::Position endPosition = {2, 5, true, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -70,10 +72,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {2, 1, true, true};
         ShipManager::Position endPosition = {2, 1, false, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -89,10 +92,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {2, 2, true, true};
         ShipManager::Position endPosition = {3, 3, false, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -108,10 +112,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {2, 1, true, true};
         ShipManager::Position endPosition = {2, 7, true, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -139,10 +144,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {1, 5, true, true};
         ShipManager::Position endPosition = {3, 1, false, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -173,10 +179,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {1, 4, true, true};
         ShipManager::Position endPosition = {5, 1, true, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);
@@ -207,10 +214,11 @@ public:
         ShipManager shm(field);
         ShipManager::Position startPosition = {1, 4, true, true};
         ShipManager::Position endPosition = {5, 1, true, true};
-        Pathfinder pf(shm);
+        Ship ship(shm);
+        Pathfinder pf(shm, ship);
 
-        TS_ASSERT( pf.setStartPosition(startPosition) );
-        TS_ASSERT( pf.setEndPosition(endPosition) );
+        TS_ASSERT( ship.setStartPosition(startPosition) );
+        TS_ASSERT( ship.setEndPosition(endPosition) );
 
         bool error;
         auto path = pf.getPath(error);

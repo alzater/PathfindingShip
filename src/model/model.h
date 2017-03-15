@@ -3,6 +3,7 @@
 
 #include "field.h"
 #include "ship_manager.h"
+#include "ship.h"
 #include "pathfinder.h"
 
 class Model
@@ -29,6 +30,7 @@ class Model
 
         Field _field;
         ShipManager _shipManager;
+        Ship _ship;
         Pathfinder _pathfinder;
 };
 

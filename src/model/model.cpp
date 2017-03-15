@@ -4,7 +4,8 @@
 Model::Model(int x, int y)
     : _field(x, y)
     , _shipManager(_field)
-    , _pathfinder(_shipManager)
+    , _ship(_shipManager)
+    , _pathfinder(_shipManager, _ship)
 {
 }
 
