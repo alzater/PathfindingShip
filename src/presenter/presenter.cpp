@@ -48,11 +48,11 @@ void Presenter::updatedCell(int x, int y, bool hasBarrier)
 
 void Presenter::updatedShipStartPosition(int x, int y, bool isVertical)
 {
-    // TODO
+    _view.setShipStartPosition(x, y, isVertical);
 }
 
 void Presenter::updatedShipEndPosition(int x, int y, bool isVertical)
 {
-    // TODO
+    _view.setShipEndPosition(x, y, isVertical);
 }
 

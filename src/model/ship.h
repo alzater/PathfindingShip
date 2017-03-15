@@ -15,8 +15,8 @@ class Ship
         const ShipManager::Position& getStartPosition() const;
         const ShipManager::Position& getEndPosition() const;
 
-        bool checkStartPosition();
-        bool checkEndPosition();
+        bool updateStartPosition();
+        bool updateEndPosition();
 
         bool checkStartPosition() const;
         bool checkEndPosition() const;

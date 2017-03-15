@@ -18,6 +18,9 @@ class Cell : public ColorRectSprite
         void shipArrived();
         void shipLeft();
 
+        void setStartCell();
+        void setEndCell();
+
     private:
         int _x, _y;
 };

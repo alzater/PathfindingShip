@@ -26,3 +26,13 @@ void Cell::shipArrived()
 void Cell::shipLeft()
 {
 }
+
+void Cell::setStartCell()
+{
+    setColor( Color(160, 250, 0) );
+}
+
+void Cell::setEndCell()
+{
+    setColor( Color(0, 250, 160) );
+}

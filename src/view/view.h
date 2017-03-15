@@ -17,6 +17,10 @@ class View : public Actor
 
         void setCell(int x, int y, bool hasBarrier);
 
+        void setShipStartPosition(int x, int y, bool isVertical);
+        void setShipEndPosition(int x, int y, bool isVertical);
+
+
     private:
         void initField();
 
@@ -36,7 +40,7 @@ class View : public Actor
         const int MAX_WIDTH  = 600;
         const int MAX_HEIGHT = 600;
 
-        bool _modifyMode = true;
+        bool _modifyMode = false;
 };
 
 DECLARE_SMART(View, spView)

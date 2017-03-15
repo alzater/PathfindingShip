@@ -26,6 +26,11 @@ class Model
         bool hasBarrier(int x, int y);
 
     private:
+        void updateShip();
+
+        ShipManager::Position calcNewShipPosition(int x, int y);
+
+    private:
         ModelObserver* _observer = nullptr;
 
         Field _field;

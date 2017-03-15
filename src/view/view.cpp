@@ -24,6 +24,38 @@ void View::setCell(int x, int y, bool hasBarrier)
         _field[x][y]->removeRock();
 }
 
+void View::setShipStartPosition(int x, int y, bool isVertical)
+{
+    if( isVertical )
+    {
+        _field[x][y-1]->setStartCell();
+        _field[x][y]->setStartCell();
+        _field[x][y+1]->setStartCell();
+    }
+    else
+    {
+        _field[x-1][y]->setStartCell();
+        _field[x][y]->setStartCell();
+        _field[x+1][y]->setStartCell();
+    }
+}
+
+void View::setShipEndPosition(int x, int y, bool isVertical)
+{
+    if( isVertical )
+    {
+        _field[x][y-1]->setEndCell();
+        _field[x][y]->setEndCell();
+        _field[x][y+1]->setEndCell();
+    }
+    else
+    {
+        _field[x-1][y]->setEndCell();
+        _field[x][y]->setEndCell();
+        _field[x+1][y]->setEndCell();
+    }
+}
+
 void View::initField()
 {
     _cellSize = std::max((float)MAX_WIDTH / _columns, (float)MAX_WIDTH / _rows);

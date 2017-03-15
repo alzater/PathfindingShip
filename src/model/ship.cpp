@@ -38,7 +38,7 @@ const ShipManager::Position& Ship::getEndPosition() const
     return _endPosition;
 }
 
-bool Ship::checkStartPosition()
+bool Ship::updateStartPosition()
 {
     if( !_shipManager.goodPosition(_startPosition) )
     {
@@ -49,7 +49,7 @@ bool Ship::checkStartPosition()
         return true;
 }
 
-bool Ship::checkEndPosition()
+bool Ship::updateEndPosition()
 {
     if( !_shipManager.goodPosition(_endPosition) )
     {

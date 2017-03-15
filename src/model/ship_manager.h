@@ -24,6 +24,7 @@ class ShipManager
         };
         friend bool operator<(const Position& lhs, const Position& rhs) { return Position::toInt(lhs) < Position::toInt(rhs); }
         friend bool operator==(const Position& lhs, const Position& rhs) { return Position::toInt(lhs) == Position::toInt(rhs); }
+        friend bool operator!=(const Position& lhs, const Position& rhs) { return !( lhs == rhs ); }
 
         enum class MOVEMENT
         {
