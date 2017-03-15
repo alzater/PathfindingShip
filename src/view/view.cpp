@@ -28,36 +28,12 @@ void View::setCell(int x, int y, bool hasBarrier)
 
 void View::setShipStartPosition(int x, int y, bool isVertical)
 {
-    if( x < 0 || y < 0 )
-    {
-        _startShipPosition->setVisible(false);
-        return;
-    }
-
-    _startShipPosition->setVisible(true);
-    _startShipPosition->setPosition( _cellSize * ( (float)x + 0.5f ), _cellSize * ( (float)y + 0.5f ) );
-
-    if( isVertical )
-        _startShipPosition->setRotation(0);
-    else
-        _startShipPosition->setRotation(M_PI / 2);
+    setShip(_startShipPosition, x, y, isVertical);
 }
 
 void View::setShipEndPosition(int x, int y, bool isVertical)
 {
-    if( x < 0 || y < 0 )
-    {
-        _endShipPosition->setVisible(false);
-        return;
-    }
-
-    _endShipPosition->setVisible(true);
-    _endShipPosition->setPosition( _cellSize * ( (float)x + 0.5f ), _cellSize * ( (float)y + 0.5f ) );
-
-    if( isVertical )
-        _endShipPosition->setRotation(0);
-    else
-        _endShipPosition->setRotation(M_PI / 2);
+    setShip(_endShipPosition, x, y, isVertical);
 }
 
 void View::initField()
@@ -126,3 +102,19 @@ bool View::cellClickRight(int column, int row)
         return _presenter->setShipEndPosition(column, row);
 }
 
+void View::setShip(spShipView ship, int column, int row, bool isVertical)
+{
+    if( column < 0 || row < 0 )
+    {
+        ship->setVisible(false);
+        return;
+    }
+
+    ship->setVisible(true);
+    ship->setPosition( _cellSize * ( (float)column + 0.5f ), _cellSize * ( (float)row + 0.5f ) );
+
+    if( isVertical )
+        ship->setRotation(0);
+    else
+        ship->setRotation(M_PI / 2);
+}
