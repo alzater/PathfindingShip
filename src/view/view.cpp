@@ -11,13 +11,8 @@ View::View(IPresenter* presenter, int columns, int rows)
     , _rows(rows)
 {
     initField();
+    initShips();
 
-    _mainShip = new ShipView(_cellSize, Color(0, 255, 0));
-    addChild(_mainShip);
-    _startShipPosition = new ShipView(_cellSize, Color(255, 255, 0));
-    addChild(_startShipPosition);
-    _endShipPosition = new ShipView(_cellSize, Color(0, 255, 255));
-    addChild(_endShipPosition);
 }
 
 View::~View()
@@ -82,6 +77,21 @@ void View::initField()
             addChild(_field[i][j]);
         }
     }
+}
+
+void View::initShips()
+{
+    _mainShip = new ShipView(_cellSize, Color(0, 255, 0));
+    _mainShip->setVisible(false);
+    addChild(_mainShip);
+
+    _startShipPosition = new ShipView(_cellSize, Color(255, 255, 0));
+    _startShipPosition->setVisible(false);
+    addChild(_startShipPosition);
+
+    _endShipPosition = new ShipView(_cellSize, Color(0, 255, 255));
+    _endShipPosition->setVisible(false);
+    addChild(_endShipPosition);
 }
 
 void View::cellClick(Event* e, int column, int row)

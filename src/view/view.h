@@ -2,7 +2,7 @@
 
 #include "../presenter/ipresenter.h"
 #include "cell.h"
-#include "ship.h"
+#include "ship_view.h"
 
 #include "oxygine-framework.h"
 
@@ -24,10 +24,13 @@ class View : public Actor
 
     private:
         void initField();
+        void initShips();
 
         void cellClick(Event* e, int column, int row);
         bool cellClickLeft(int column, int row);
         bool cellClickRight(int column, int row);
+
+        void setShip(spShipView ship, int column, int row, bool isVertical);
 
     private:
         IPresenter* _presenter;

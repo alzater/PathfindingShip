@@ -1,5 +1,5 @@
 // ship.cpp
-#include "ship.h"
+#include "ship_view.h"
 
 
 ShipView::ShipView(float cellSize, const Color& color)

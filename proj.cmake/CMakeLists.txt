@@ -14,7 +14,7 @@ add_executable(PathfindingShip
 ../src/presenter/presenter.cpp
 ../src/view/view.cpp
 ../src/view/cell.cpp
-../src/view/ship.cpp
+../src/view/ship_view.cpp
 ../src/model/model.cpp
 ../src/model/field.cpp
 ../src/model/ship_manager.cpp
