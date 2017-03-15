@@ -2,6 +2,7 @@
 
 #include "../presenter/ipresenter.h"
 #include "cell.h"
+#include "ship.h"
 
 #include "oxygine-framework.h"
 
@@ -41,6 +42,10 @@ class View : public Actor
         const int MAX_HEIGHT = 600;
 
         bool _modifyMode = false;
+
+        spShipView _mainShip;
+        spShipView _startShipPosition;
+        spShipView _endShipPosition;
 };
 
 DECLARE_SMART(View, spView)

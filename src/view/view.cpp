@@ -11,6 +11,13 @@ View::View(IPresenter* presenter, int columns, int rows)
     , _rows(rows)
 {
     initField();
+
+    _mainShip = new ShipView(_cellSize, Color(0, 255, 0));
+    addChild(_mainShip);
+    _startShipPosition = new ShipView(_cellSize, Color(255, 255, 0));
+    addChild(_startShipPosition);
+    _endShipPosition = new ShipView(_cellSize, Color(0, 255, 255));
+    addChild(_endShipPosition);
 }
 
 View::~View()
@@ -26,34 +33,36 @@ void View::setCell(int x, int y, bool hasBarrier)
 
 void View::setShipStartPosition(int x, int y, bool isVertical)
 {
+    if( x < 0 || y < 0 )
+    {
+        _startShipPosition->setVisible(false);
+        return;
+    }
+
+    _startShipPosition->setVisible(true);
+    _startShipPosition->setPosition( _cellSize * ( (float)x + 0.5f ), _cellSize * ( (float)y + 0.5f ) );
+
     if( isVertical )
-    {
-        _field[x][y-1]->setStartCell();
-        _field[x][y]->setStartCell();
-        _field[x][y+1]->setStartCell();
-    }
+        _startShipPosition->setRotation(0);
     else
-    {
-        _field[x-1][y]->setStartCell();
-        _field[x][y]->setStartCell();
-        _field[x+1][y]->setStartCell();
-    }
+        _startShipPosition->setRotation(M_PI / 2);
 }
 
 void View::setShipEndPosition(int x, int y, bool isVertical)
 {
+    if( x < 0 || y < 0 )
+    {
+        _endShipPosition->setVisible(false);
+        return;
+    }
+
+    _endShipPosition->setVisible(true);
+    _endShipPosition->setPosition( _cellSize * ( (float)x + 0.5f ), _cellSize * ( (float)y + 0.5f ) );
+
     if( isVertical )
-    {
-        _field[x][y-1]->setEndCell();
-        _field[x][y]->setEndCell();
-        _field[x][y+1]->setEndCell();
-    }
+        _endShipPosition->setRotation(0);
     else
-    {
-        _field[x-1][y]->setEndCell();
-        _field[x][y]->setEndCell();
-        _field[x+1][y]->setEndCell();
-    }
+        _endShipPosition->setRotation(M_PI / 2);
 }
 
 void View::initField()
@@ -106,6 +115,4 @@ bool View::cellClickRight(int column, int row)
     else
         return _presenter->setShipEndPosition(column, row);
 }
-
-
 
