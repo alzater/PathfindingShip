@@ -5,7 +5,7 @@ Presenter::Presenter(spActor scene, std::pair<int, int> fieldSize)
     : _model(fieldSize.first, fieldSize.second)
     , _view(this, fieldSize.first, fieldSize.second)
 {
-    _model.setObserver(*this);
+    _model.setObserver(this);
 
     scene->addChild(&_view);
 }
@@ -13,7 +13,7 @@ Presenter::Presenter(spActor scene, std::pair<int, int> fieldSize)
 Presenter::~Presenter()
 {
     _view.detach();
-    _model.removeObserver(*this);
+    _model.removeObserver(this);
 }
 
 bool Presenter::setShipStartPosition(int x, int y)
@@ -43,7 +43,7 @@ std::vector<std::tuple<int, int, bool>> Presenter::getShipPath()
 
 void Presenter::updatedCell(int x, int y, bool hasBarrier)
 {
-    // TODO
+    _view.setCell(x, y, hasBarrier);
 }
 
 void Presenter::updatedShipStartPosition(int x, int y, bool isVertical)

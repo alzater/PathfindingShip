@@ -16,6 +16,7 @@ void Cell::setRock()
 
 void Cell::removeRock()
 {
+    setColor( Color(0, 0, 240) );
 }
 
 void Cell::shipArrived()

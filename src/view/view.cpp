@@ -16,6 +16,14 @@ View::View(IPresenter* presenter, int columns, int rows)
 View::~View()
 {}
 
+void View::setCell(int x, int y, bool hasBarrier)
+{
+    if( hasBarrier )
+        _field[x][y]->setRock();
+    else
+        _field[x][y]->removeRock();
+}
+
 void View::initField()
 {
     _cellSize = std::max((float)MAX_WIDTH / _columns, (float)MAX_WIDTH / _rows);
@@ -66,4 +74,6 @@ bool View::cellClickRight(int column, int row)
     else
         return _presenter->setShipEndPosition(column, row);
 }
+
+
 

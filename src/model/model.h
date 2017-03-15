@@ -10,8 +10,8 @@ class Model
     public:
         Model(int x, int y);
 
-        void setObserver(ModelObserver& observer);
-        void removeObserver(ModelObserver& observer);
+        void setObserver(ModelObserver* observer);
+        void removeObserver(ModelObserver* observer);
 
         bool setShipStartPosition(int x, int y);
         bool setShipEndPosition(int x, int y);
@@ -25,6 +25,8 @@ class Model
         bool hasBarrier(int x, int y);
 
     private:
+        ModelObserver* _observer = nullptr;
+
         Field _field;
         ShipManager _shipManager;
         Pathfinder _pathfinder;

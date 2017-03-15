@@ -15,6 +15,8 @@ class View : public Actor
         View(IPresenter* presenter, int columns, int rows);
         virtual ~View();
 
+        void setCell(int x, int y, bool hasBarrier);
+
     private:
         void initField();
 
@@ -34,7 +36,7 @@ class View : public Actor
         const int MAX_WIDTH  = 600;
         const int MAX_HEIGHT = 600;
 
-        bool _modifyMode = false;
+        bool _modifyMode = true;
 };
 
 DECLARE_SMART(View, spView)
