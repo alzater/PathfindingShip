@@ -176,5 +176,5 @@ void View::changeMode()
 
 void View::pathfinding()
 {
-    // TODO
+    _presenter->getShipPath();
 }
