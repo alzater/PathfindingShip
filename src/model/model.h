@@ -20,7 +20,8 @@ class Model
         bool setBarrier(int x, int y);
         bool removeBarrier(int x, int y);
 
-        std::vector<std::tuple<int, int, bool>> getShipPath();
+        std::vector<ShipManager::MOVEMENT> getShipPath();
+        std::tuple<int, int, bool> getShipStartPosition();
 
         std::pair<int, int> getFieldSize();
         bool hasBarrier(int x, int y);

@@ -36,9 +36,49 @@ bool Presenter::removeBarrier(int x, int y)
     return _model.removeBarrier(x, y);
 }
 
-std::vector<std::tuple<int, int, bool>> Presenter::getShipPath()
+std::vector<ShipMove> Presenter::getShipPath()
 {
-    return _model.getShipPath();
+    const auto path = _model.getShipPath();
+    std::vector<ShipMove> result;
+    if( path.empty() )
+        return result;
+
+    auto startPosition = _model.getShipStartPosition();
+    ShipMove firstMove;
+    if( std::get<2>(startPosition) )
+        firstMove.type = ShipMove::Type::MOVE;
+    else
+        firstMove.type = ShipMove::Type::ROTATE_RIGHT;
+    int xPos = firstMove.x = std::get<0>(startPosition);
+    int yPos = firstMove.y = std::get<1>(startPosition);
+
+    result.push_back(firstMove);
+
+    for( const auto& move : path )
+    {
+        ShipMove shipMove;
+        if( move == ShipManager::MOVEMENT::ROTATE_LEFT )
+            shipMove.type = ShipMove::Type::ROTATE_LEFT;
+        else if( move == ShipManager::MOVEMENT::ROTATE_RIGHT )
+            shipMove.type = ShipMove::Type::ROTATE_RIGHT;
+        else
+        {
+            switch( move )
+            {
+                case ShipManager::MOVEMENT::UP    : yPos -= 1; break;
+                case ShipManager::MOVEMENT::DOWN  : yPos += 1; break;
+                case ShipManager::MOVEMENT::RIGHT : xPos += 1; break;
+                case ShipManager::MOVEMENT::LEFT  : xPos -= 1; break;
+            }
+            shipMove.type = ShipMove::Type::MOVE;
+        }
+        shipMove.x = xPos;
+        shipMove.y = yPos;
+
+        result.push_back(shipMove);
+    }
+
+    return result;
 }
 
 void Presenter::updatedCell(int x, int y, bool hasBarrier)

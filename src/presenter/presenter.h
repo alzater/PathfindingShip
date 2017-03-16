@@ -25,7 +25,7 @@ class Presenter : public IPresenter, public ModelObserver
         virtual bool setBarrier(int x, int y) override;
         virtual bool removeBarrier(int x, int y) override;
 
-        virtual std::vector<std::tuple<int, int, bool>> getShipPath() override;
+        virtual std::vector<ShipMove> getShipPath() override;
 
         // ModelObserver
         virtual void updatedCell(int x, int y, bool hasBarrier) override;

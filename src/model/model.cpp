@@ -1,6 +1,8 @@
 // model.cpp
 #include "model.h"
 
+#include <iostream>
+
 Model::Model(int x, int y)
     : _field(x, y)
     , _shipManager(_field)
@@ -98,13 +100,22 @@ void printPath(const std::vector<ShipManager::MOVEMENT>& path)
     std::cout << std::endl;
 }
 
-std::vector<std::tuple<int, int, bool>> Model::getShipPath()
+std::vector<ShipManager::MOVEMENT> Model::getShipPath()
 {
     bool error = true;
     auto path = _pathfinder.getPath(error);
-    printPath(path);
+    if( error )
+        return {};
 
-    return {};
+printPath(path);
+    return path;
+}
+
+std::tuple<int, int, bool> Model::getShipStartPosition()
+{
+    const auto pos = _ship.getStartPosition();
+
+    return std::make_tuple(pos.x, pos.y, (bool)pos.isVertical);
 }
 
 std::pair<int, int> Model::getFieldSize()
@@ -148,3 +159,4 @@ ShipManager::Position Model::calcNewShipPosition(int x, int y)
 
     return ShipManager::Position::illegal();
 }
+

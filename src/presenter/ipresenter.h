@@ -2,6 +2,8 @@
 #ifndef I_PRESENTER_H
 #define I_PRESENTER_H
 
+#include "ship_move.h"
+
 #include <vector>
 
 class IPresenter
@@ -13,7 +15,7 @@ class IPresenter
         virtual bool setBarrier(int x, int y) = 0;
         virtual bool removeBarrier(int x, int y) = 0;
 
-        virtual std::vector<std::tuple<int, int, bool>> getShipPath() = 0;
+        virtual std::vector<ShipMove> getShipPath() = 0;
 };
 
 #endif

@@ -59,10 +59,6 @@ void View::initField()
 
 void View::initShips()
 {
-    _mainShip = new ShipView(_cellSize, Color(0, 255, 0));
-    _mainShip->setVisible(false);
-    addChild(_mainShip);
-
     _startShipPosition = new ShipView(_cellSize, Color(255, 255, 0));
     _startShipPosition->setVisible(false);
     addChild(_startShipPosition);
@@ -70,6 +66,10 @@ void View::initShips()
     _endShipPosition = new ShipView(_cellSize, Color(0, 255, 255));
     _endShipPosition->setVisible(false);
     addChild(_endShipPosition);
+
+    _mainShip = new ShipView(_cellSize, Color(0, 255, 0));
+    _mainShip->setVisible(false);
+    addChild(_mainShip);
 }
 
 void View::cellClick(Event* e, int column, int row)
@@ -176,5 +176,41 @@ void View::changeMode()
 
 void View::pathfinding()
 {
-    _presenter->getShipPath();
+    const auto path = _presenter->getShipPath();
+    if( path.empty() )
+        return;
+
+    spTweenQueue tween = new TweenQueue;
+    float angle = 0;
+    int duration = 10;
+
+    for(const auto& move : path)
+    {
+        if( move.type == ShipMove::Type::MOVE )
+        {
+            tween->add(Actor::TweenPosition( Vector2(_cellSize*((float)move.x+0.5f), _cellSize*((float)move.y+0.5f))), duration );
+        }
+        else
+        {
+            if( move.type == ShipMove::Type::ROTATE_LEFT )
+                angle -= M_PI/2;
+            else
+                angle += M_PI/2;
+
+            tween->add(Actor::TweenRotation(angle), duration);
+
+            std::cout << angle << std::endl;
+        }
+
+        duration = 500;
+    }
+
+    tween->add(TweenDummy(), 2000);
+    tween->setDoneCallback([this](Event*){pathfinding();});
+
+    _mainShip->removeTweens();
+    _mainShip->setVisible(true);
+    _mainShip->setRotation(0);
+    _mainShip->setPosition( Vector2(_cellSize*((float)path[0].x+0.5f), _cellSize*((float)path[0].y+0.5f)));
+    _mainShip->addTween(tween);
 }
