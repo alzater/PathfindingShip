@@ -25,6 +25,7 @@ class View : public Actor
     private:
         void initField();
         void initShips();
+        void initButtons();
 
         void cellClick(Event* e, int column, int row);
         bool cellClickLeft(int column, int row);
@@ -32,14 +33,16 @@ class View : public Actor
 
         void setShip(spShipView ship, int column, int row, bool isVertical);
 
-        void initButtons();
         void changeMode();
+        void pathfinding();
+
 
     private:
         IPresenter* _presenter;
 
         std::vector<std::vector<spCell>> _field;
         spTextField _modeButtonText;
+        spButton _pathfindButton;
 
         int _columns;
         int _rows;

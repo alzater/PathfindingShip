@@ -138,6 +138,24 @@ void View::initButtons()
     _modeButtonText->setFont(fnt);
     _modeButtonText->setAlign(TextStyle::VALIGN_MIDDLE, TextStyle::HALIGN_MIDDLE);
     _modeButtonText->setTouchEnabled(false);
+
+    _pathfindButton = new Button();
+    _pathfindButton->setSize(200, 60);
+    _pathfindButton->setPosition(600, 80);
+    _pathfindButton->addEventListener(TouchEvent::CLICK, [this](Event*){pathfinding();});
+    if( !_modifyMode )
+        _pathfindButton->setVisible(true);
+    else
+        _pathfindButton->setVisible(false);
+    addChild(_pathfindButton);
+
+    spTextField pathfindButtonText = new TextField();
+    _pathfindButton->addChild(pathfindButtonText);
+    pathfindButtonText->setText("Find path");
+    pathfindButtonText->setSize(200, 55);
+    pathfindButtonText->setFont(fnt);
+    pathfindButtonText->setAlign(TextStyle::VALIGN_MIDDLE, TextStyle::HALIGN_MIDDLE);
+    pathfindButtonText->setTouchEnabled(false);
 }
 
 void View::changeMode()
@@ -145,7 +163,18 @@ void View::changeMode()
     _modifyMode = !_modifyMode;
 
     if( _modifyMode )
+    {
         _modeButtonText->setText("Apply modify");
+        _pathfindButton->setVisible(false);
+    }
     else
+    {
         _modeButtonText->setText("Modify");
+        _pathfindButton->setVisible(true);
+    }
+}
+
+void View::pathfinding()
+{
+    // TODO
 }
