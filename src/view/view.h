@@ -32,11 +32,14 @@ class View : public Actor
 
         void setShip(spShipView ship, int column, int row, bool isVertical);
 
+        void initButtons();
+        void changeMode();
+
     private:
         IPresenter* _presenter;
+
         std::vector<std::vector<spCell>> _field;
-        //spShip _ship;
-        //spButton _editButton;
+        spTextField _modeButtonText;
 
         int _columns;
         int _rows;

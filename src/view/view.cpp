@@ -5,6 +5,8 @@
 
 #include <iostream>
 
+extern Resources gameResources;
+
 View::View(IPresenter* presenter, int columns, int rows)
     : _presenter(presenter)
     , _columns(columns)
@@ -12,7 +14,7 @@ View::View(IPresenter* presenter, int columns, int rows)
 {
     initField();
     initShips();
-
+    initButtons();
 }
 
 View::~View()
@@ -83,7 +85,7 @@ void View::cellClick(Event* e, int column, int row)
         result = cellClickRight(column, row);
 
     if( !result )
-        _field[column][row]->addTween(ColorRectSprite::TweenColor(Color(255, 0, 0)), 1000, 1, true, Tween:: ease_inOutQuad);
+        _field[column][row]->addTween(ColorRectSprite::TweenColor(Color(255, 0, 0)), 400, 1, true, Tween:: ease_outQuart);
 }
 
 bool View::cellClickLeft(int column, int row)
@@ -117,4 +119,33 @@ void View::setShip(spShipView ship, int column, int row, bool isVertical)
         ship->setRotation(0);
     else
         ship->setRotation(M_PI / 2);
+}
+
+void View::initButtons()
+{
+    ResFont *fnt = gameResources.getResFont("main");
+
+    spButton modeButton = new Button();
+    modeButton->setSize(200, 60);
+    modeButton->setPosition(600, 10);
+    modeButton->addEventListener(TouchEvent::CLICK, [this](Event*){changeMode();});
+    addChild(modeButton);
+
+    _modeButtonText = new TextField();
+    modeButton->addChild(_modeButtonText);
+    _modeButtonText->setText("Modify");
+    _modeButtonText->setSize(200, 55);
+    _modeButtonText->setFont(fnt);
+    _modeButtonText->setAlign(TextStyle::VALIGN_MIDDLE, TextStyle::HALIGN_MIDDLE);
+    _modeButtonText->setTouchEnabled(false);
+}
+
+void View::changeMode()
+{
+    _modifyMode = !_modifyMode;
+
+    if( _modifyMode )
+        _modeButtonText->setText("Apply modify");
+    else
+        _modeButtonText->setText("Modify");
 }
