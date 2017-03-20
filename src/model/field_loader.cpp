@@ -19,14 +19,14 @@ Field FieldLoader::getNextField()
     config >> width >> height;
     Field field(width, height);
 
-    for( size_t i = 0; i < width; ++i )
+    for( size_t i = 0; i < height; ++i )
     {
         for( size_t j = 0; j < width; ++j )
         {
             char barrier;
             config >> barrier;
             if( barrier == '1' )
-                field.setBarrier(i, j);
+                field.setBarrier(j, i);
         }
     }
 

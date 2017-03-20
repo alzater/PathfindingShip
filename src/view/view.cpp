@@ -7,13 +7,9 @@
 
 extern Resources gameResources;
 
-View::View(IPresenter* presenter, int columns, int rows)
+View::View(IPresenter* presenter)
     : _presenter(presenter)
-    , _columns(columns)
-    , _rows(rows)
 {
-    initField();
-    initShips();
     initButtons();
 }
 
@@ -38,9 +34,14 @@ void View::setShipEndPosition(int x, int y, bool isVertical)
     setShip(_endShipPosition, x, y, isVertical);
 }
 
-void View::initField()
+void View::initField(int columns, int rows)
 {
-    _cellSize = std::max((float)MAX_WIDTH / _columns, (float)MAX_WIDTH / _rows);
+    _columns = columns;
+    _rows = rows;
+
+    destroyField();
+
+    _cellSize = std::min((float)MAX_WIDTH / _columns, (float)MAX_WIDTH / _rows);
 
     _field.resize(_columns);
     for( int i = 0; i < _columns; ++i )
@@ -54,18 +55,26 @@ void View::initField()
             addChild(_field[i][j]);
         }
     }
+
+    initShips();
 }
 
 void View::initShips()
 {
+    if( _startShipPosition )
+        _startShipPosition->detach();
     _startShipPosition = new ShipPlace(_cellSize, Color(255, 255, 0));
     _startShipPosition->setVisible(false);
     addChild(_startShipPosition);
 
+    if( _endShipPosition )
+        _endShipPosition->detach();
     _endShipPosition = new ShipPlace(_cellSize, Color(0, 255, 255));
     _endShipPosition->setVisible(false);
     addChild(_endShipPosition);
 
+    if( _mainShip )
+        _mainShip->detach();
     _mainShip = new ShipView(_cellSize);
     _mainShip->setVisible(false);
     addChild(_mainShip);
@@ -234,4 +243,11 @@ void View::pathfinding()
 void View::nextMap()
 {
     _presenter->nextMap();
+}
+
+void View::destroyField()
+{
+    for( auto& column : _field )
+        for( auto& cell : column )
+            cell->detach();
 }

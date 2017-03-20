@@ -27,7 +27,7 @@ class Model
         std::pair<int, int> getFieldSize();
         bool hasBarrier(int x, int y);
 
-        void nextMap();
+        void nextField();
 
     private:
         void updateShip();

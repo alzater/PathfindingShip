@@ -14,7 +14,7 @@ using namespace oxygine;
 class View : public Actor
 {
     public:
-        View(IPresenter* presenter, int columns, int rows);
+        View(IPresenter* presenter);
         virtual ~View();
 
         void setCell(int x, int y, bool hasBarrier);
@@ -22,9 +22,9 @@ class View : public Actor
         void setShipStartPosition(int x, int y, bool isVertical);
         void setShipEndPosition(int x, int y, bool isVertical);
 
+        void initField(int columns, int rows);
 
     private:
-        void initField();
         void initShips();
         void initButtons();
 
@@ -37,6 +37,8 @@ class View : public Actor
         void changeMode();
         void pathfinding();
         void nextMap();
+
+        void destroyField();
 
     private:
         IPresenter* _presenter;

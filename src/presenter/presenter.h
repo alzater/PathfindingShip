@@ -33,6 +33,7 @@ class Presenter : public IPresenter, public ModelObserver
         virtual void updatedCell(int x, int y, bool hasBarrier) override;
         virtual void updatedShipStartPosition(int x, int y, bool isVertical) override;
         virtual void updatedShipEndPosition(int x, int y, bool isVertical) override;
+        virtual void updatedField(int x, int y) override;
 
     private:
         View _view;

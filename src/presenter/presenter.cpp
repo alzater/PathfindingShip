@@ -1,11 +1,14 @@
 // presenter.cpp
 #include "presenter.h"
 
+#include <iostream>
+
 Presenter::Presenter(spActor scene, std::pair<int, int> fieldSize)
     : _model()
-    , _view(this, fieldSize.first, fieldSize.second)
+    , _view(this)
 {
     _model.setObserver(this);
+    _model.nextField();
 
     scene->addChild(&_view);
 }
@@ -83,11 +86,12 @@ std::vector<ShipMove> Presenter::getShipPath()
 
 void Presenter::nextMap()
 {
-    _model.nextMap();
+    _model.nextField();
 }
 
 void Presenter::updatedCell(int x, int y, bool hasBarrier)
 {
+    std::cout << x << ' ' << y << std::endl;
     _view.setCell(x, y, hasBarrier);
 }
 
@@ -101,3 +105,8 @@ void Presenter::updatedShipEndPosition(int x, int y, bool isVertical)
     _view.setShipEndPosition(x, y, isVertical);
 }
 
+void Presenter::updatedField(int x, int y)
+{
+    std::cout << "f" << x << ' ' << y << std::endl;
+    _view.initField(x, y);
+}

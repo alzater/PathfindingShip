@@ -36,5 +36,6 @@ void Cell::setRock()
 
 void Cell::removeRock()
 {
-    rock->setVisible(false);
+    if( rock )
+        rock->setVisible(false);
 }

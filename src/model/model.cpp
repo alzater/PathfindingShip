@@ -8,9 +8,7 @@ Model::Model()
     , _shipManager(_field)
     , _ship(_shipManager)
     , _pathfinder(_shipManager, _ship)
-{
-    nextMap();
-}
+{}
 
 void Model::setObserver(ModelObserver* observer)
 {
@@ -162,8 +160,13 @@ ShipManager::Position Model::calcNewShipPosition(int x, int y)
 }
 
 
-void Model::nextMap()
+void Model::nextField()
 {
     _field = _fieldLoader.getNextField();
+
+    _observer->updatedField( _field.getWidth(), _field.getHeight() );
+    for( int i = 0; i < _field.getWidth(); ++i )
+        for( int j = 0; j < _field.getHeight(); ++j )
+            _observer->updatedCell(i, j, _field.hasBarrier(i, j));
 }
 
