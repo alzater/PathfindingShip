@@ -7,7 +7,7 @@ cd build
 cmake ..
 
 #build it
-make
+make -j5
 
 #move to working data folder with resources
 cd ../../data

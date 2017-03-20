@@ -15,10 +15,11 @@ add_executable(PathfindingShip
 ../src/view/view.cpp
 ../src/view/cell.cpp
 ../src/view/ship_view.cpp
+../src/view/ship_place.cpp
 ../src/model/model.cpp
+../src/model/ship.cpp
 ../src/model/field.cpp
 ../src/model/ship_manager.cpp
-../src/model/ship.cpp
 ../src/model/pathfinder.cpp
  )
 

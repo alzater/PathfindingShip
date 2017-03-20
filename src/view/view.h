@@ -3,6 +3,7 @@
 #include "../presenter/ipresenter.h"
 #include "cell.h"
 #include "ship_view.h"
+#include "ship_place.h"
 
 #include "oxygine-framework.h"
 
@@ -31,7 +32,7 @@ class View : public Actor
         bool cellClickLeft(int column, int row);
         bool cellClickRight(int column, int row);
 
-        void setShip(spShipView ship, int column, int row, bool isVertical);
+        void setShip(spActor ship, int column, int row, bool isVertical);
 
         void changeMode();
         void pathfinding();
@@ -53,8 +54,8 @@ class View : public Actor
         bool _modifyMode = false;
 
         spShipView _mainShip;
-        spShipView _startShipPosition;
-        spShipView _endShipPosition;
+        spShipPlace _startShipPosition;
+        spShipPlace _endShipPosition;
 };
 
 DECLARE_SMART(View, spView)

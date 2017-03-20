@@ -58,15 +58,15 @@ void View::initField()
 
 void View::initShips()
 {
-    _startShipPosition = new ShipView(_cellSize, Color(255, 255, 0));
+    _startShipPosition = new ShipPlace(_cellSize, Color(255, 255, 0));
     _startShipPosition->setVisible(false);
     addChild(_startShipPosition);
 
-    _endShipPosition = new ShipView(_cellSize, Color(0, 255, 255));
+    _endShipPosition = new ShipPlace(_cellSize, Color(0, 255, 255));
     _endShipPosition->setVisible(false);
     addChild(_endShipPosition);
 
-    _mainShip = new ShipView(_cellSize, Color(0, 255, 0));
+    _mainShip = new ShipView(_cellSize);
     _mainShip->setVisible(false);
     addChild(_mainShip);
 }
@@ -103,7 +103,7 @@ bool View::cellClickRight(int column, int row)
         return _presenter->setShipEndPosition(column, row);
 }
 
-void View::setShip(spShipView ship, int column, int row, bool isVertical)
+void View::setShip(spActor ship, int column, int row, bool isVertical)
 {
     if( column < 0 || row < 0 )
     {

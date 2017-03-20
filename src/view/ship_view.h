@@ -6,10 +6,10 @@
 
 using namespace oxygine;
 
-class ShipView : public ColorRectSprite
+class ShipView : public Sprite
 {
     public:
-        ShipView(float cellSize, const Color& color);
+        ShipView(float cellSize);
         virtual ~ShipView();
 };
 
