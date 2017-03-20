@@ -36,7 +36,7 @@ class View : public Actor
 
         void changeMode();
         void pathfinding();
-
+        void nextMap();
 
     private:
         IPresenter* _presenter;

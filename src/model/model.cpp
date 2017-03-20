@@ -160,3 +160,9 @@ ShipManager::Position Model::calcNewShipPosition(int x, int y)
     return ShipManager::Position::illegal();
 }
 
+
+void Model::nextMap()
+{
+
+}
+

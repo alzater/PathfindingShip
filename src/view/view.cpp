@@ -155,6 +155,20 @@ void View::initButtons()
     pathfindButtonText->setFont(fnt);
     pathfindButtonText->setAlign(TextStyle::VALIGN_MIDDLE, TextStyle::HALIGN_MIDDLE);
     pathfindButtonText->setTouchEnabled(false);
+
+    spButton _nextMapButton = new Button();
+    _nextMapButton->setSize(200, 60);
+    _nextMapButton->setPosition(600, 500);
+    _nextMapButton->addEventListener(TouchEvent::CLICK, [this](Event*){nextMap();});
+    addChild(_nextMapButton);
+
+    spTextField nextMapButtonText = new TextField();
+    _nextMapButton->addChild(nextMapButtonText);
+    nextMapButtonText->setText("Next map");
+    nextMapButtonText->setSize(200, 55);
+    nextMapButtonText->setFont(fnt);
+    nextMapButtonText->setAlign(TextStyle::VALIGN_MIDDLE, TextStyle::HALIGN_MIDDLE);
+    nextMapButtonText->setTouchEnabled(false);
 }
 
 void View::changeMode()
@@ -215,4 +229,9 @@ void View::pathfinding()
     _mainShip->setRotation(0);
     _mainShip->setPosition( Vector2(_cellSize*((float)path[0].x+0.5f), _cellSize*((float)path[0].y+0.5f)));
     _mainShip->addTween(tween);
+}
+
+void View::nextMap()
+{
+    _presenter->nextMap();
 }

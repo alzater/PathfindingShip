@@ -81,6 +81,11 @@ std::vector<ShipMove> Presenter::getShipPath()
     return result;
 }
 
+void Presenter::nextMap()
+{
+    _model.nextMap();
+}
+
 void Presenter::updatedCell(int x, int y, bool hasBarrier)
 {
     _view.setCell(x, y, hasBarrier);

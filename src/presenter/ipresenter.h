@@ -16,6 +16,8 @@ class IPresenter
         virtual bool removeBarrier(int x, int y) = 0;
 
         virtual std::vector<ShipMove> getShipPath() = 0;
+
+        virtual void nextMap() = 0;
 };
 
 #endif

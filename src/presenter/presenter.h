@@ -27,6 +27,8 @@ class Presenter : public IPresenter, public ModelObserver
 
         virtual std::vector<ShipMove> getShipPath() override;
 
+        virtual void nextMap() override;
+
         // ModelObserver
         virtual void updatedCell(int x, int y, bool hasBarrier) override;
         virtual void updatedShipStartPosition(int x, int y, bool isVertical) override;
