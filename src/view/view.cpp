@@ -163,6 +163,9 @@ void View::changeMode()
 
     if( _modifyMode )
     {
+        _mainShip->removeTweens();
+        _mainShip->setVisible(false);
+
         _modeButtonText->setText("Apply modify");
         _pathfindButton->setVisible(false);
     }
