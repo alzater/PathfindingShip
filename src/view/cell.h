@@ -9,20 +9,14 @@ using namespace oxygine;
 class Cell : public ColorRectSprite
 {
     public:
-        Cell();
+        Cell(float size);
         virtual ~Cell();
 
         void setRock();
         void removeRock();
 
-        void shipArrived();
-        void shipLeft();
-
-        void setStartCell();
-        void setEndCell();
-
     private:
-        int _x, _y;
+        spSprite rock;
 };
 
 DECLARE_SMART(Cell, spCell);

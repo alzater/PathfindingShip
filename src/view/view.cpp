@@ -48,8 +48,7 @@ void View::initField()
         _field[i].resize(_rows);
         for( int j = 0; j < _rows; j++ )
         {
-            _field[i][j] = new Cell();
-            _field[i][j]->setSize(_cellSize, _cellSize);
+            _field[i][j] = new Cell(_cellSize);
             _field[i][j]->setPosition(_cellSize * i, _cellSize * j);
             _field[i][j]->addEventListener(TouchEvent::CLICK, [this, i, j](Event* e){ cellClick(e, i, j); });
             addChild(_field[i][j]);
