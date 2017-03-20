@@ -163,6 +163,6 @@ ShipManager::Position Model::calcNewShipPosition(int x, int y)
 
 void Model::nextMap()
 {
-
+    _field = _fieldLoader.getNextField();
 }
 

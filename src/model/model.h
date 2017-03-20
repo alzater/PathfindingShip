@@ -2,6 +2,7 @@
 #include "model_observer.h"
 
 #include "field.h"
+#include "field_loader.h"
 #include "ship_manager.h"
 #include "ship.h"
 #include "pathfinder.h"
@@ -37,6 +38,7 @@ class Model
         ModelObserver* _observer = nullptr;
 
         Field _field;
+        FieldLoader _fieldLoader;
         ShipManager _shipManager;
         Ship _ship;
         Pathfinder _pathfinder;

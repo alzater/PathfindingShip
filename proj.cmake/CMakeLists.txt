@@ -19,6 +19,7 @@ add_executable(PathfindingShip
 ../src/model/model.cpp
 ../src/model/ship.cpp
 ../src/model/field.cpp
+../src/model/field_loader.cpp
 ../src/model/ship_manager.cpp
 ../src/model/pathfinder.cpp
  )
