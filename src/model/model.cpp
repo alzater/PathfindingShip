@@ -3,12 +3,13 @@
 
 #include <iostream>
 
-Model::Model(int x, int y)
-    : _field(x, y)
+Model::Model()
+    : _field(1, 1)
     , _shipManager(_field)
     , _ship(_shipManager)
     , _pathfinder(_shipManager, _ship)
 {
+    nextMap();
 }
 
 void Model::setObserver(ModelObserver* observer)

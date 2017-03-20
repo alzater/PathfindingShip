@@ -10,7 +10,7 @@
 class Model
 {
     public:
-        Model(int x, int y);
+        Model();
 
         void setObserver(ModelObserver* observer);
         void removeObserver(ModelObserver* observer);

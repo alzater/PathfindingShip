@@ -2,7 +2,7 @@
 #include "presenter.h"
 
 Presenter::Presenter(spActor scene, std::pair<int, int> fieldSize)
-    : _model(fieldSize.first, fieldSize.second)
+    : _model()
     , _view(this, fieldSize.first, fieldSize.second)
 {
     _model.setObserver(this);
