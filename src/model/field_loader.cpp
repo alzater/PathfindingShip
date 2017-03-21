@@ -9,28 +9,41 @@ FieldLoader::FieldLoader()
     loadFieldNames();
 }
 
-Field FieldLoader::getNextField()
+std::tuple<Field, std::tuple<int, int, bool>, std::tuple<int, int, bool>>  FieldLoader::getNextField()
 {
     std::ifstream config( "fields/" + getNextFieldName() );
-    if( !config )
-        return Field(1, 1);
+    Field field(1, 1);
+    std::tuple<int, int, bool> shipStartPosition = std::make_tuple(-1, -1, false);
+    std::tuple<int, int, bool> shipEndPosition = std::make_tuple(-1, -1, false);
 
-    int width, height;
-    config >> width >> height;
-    Field field(width, height);
-
-    for( size_t i = 0; i < height; ++i )
+    if( config )
     {
-        for( size_t j = 0; j < width; ++j )
+        int width, height;
+        config >> width >> height;
+        field = Field(width, height);
+
+        for( size_t i = 0; i < height; ++i )
         {
-            char barrier;
-            config >> barrier;
-            if( barrier == '1' )
-                field.setBarrier(j, i);
+            for( size_t j = 0; j < width; ++j )
+            {
+                char cell;
+                config >> cell;
+
+                if( cell == '1' )
+                    field.setBarrier(j, i);
+                if( cell == 's' )
+                    shipStartPosition = std::make_tuple(j, i, true);
+                if( cell == 'S' )
+                    shipStartPosition = std::make_tuple(j, i, false);
+                if( cell == 'f' )
+                    shipEndPosition = std::make_tuple(j, i, true);
+                if( cell == 'F' )
+                    shipEndPosition = std::make_tuple(j, i, false);
+            }
         }
     }
 
-    return field;
+    return std::make_tuple(field, shipStartPosition, shipEndPosition);
 }
 
 void FieldLoader::loadFieldNames()

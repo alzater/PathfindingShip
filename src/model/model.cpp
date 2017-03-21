@@ -127,13 +127,13 @@ bool Model::hasBarrier(int x, int y)
 
 void Model::updateShip()
 {
-    if( !_ship.updateStartPosition() && _observer != nullptr )
+    if( _ship.updateStartPosition() && _observer != nullptr )
     {
         const auto pos = _ship.getStartPosition();
         _observer->updatedShipStartPosition(pos.x, pos.y, pos.isVertical);
     }
 
-    if( !_ship.updateEndPosition() && _observer != nullptr )
+    if( _ship.updateEndPosition() && _observer != nullptr )
     {
         const auto pos = _ship.getEndPosition();
         _observer->updatedShipEndPosition(pos.x, pos.y, pos.isVertical);
@@ -164,11 +164,20 @@ void Model::nextField()
 {
     _ship.clear();
 
-    _field = _fieldLoader.getNextField();
+    auto newField = _fieldLoader.getNextField();
+    _field = std::get<0>(newField);
+    auto start = std::get<1>(newField);
+    auto end = std::get<2>(newField);
+    ShipManager::Position shipStartPosition = {std::get<0>(start), std::get<1>(start), std::get<2>(start), true};
+    ShipManager::Position shipEndPosition = {std::get<0>(end), std::get<1>(end), std::get<2>(end), true};
 
     _observer->updatedField( _field.getWidth(), _field.getHeight() );
     for( int i = 0; i < _field.getWidth(); ++i )
         for( int j = 0; j < _field.getHeight(); ++j )
             _observer->updatedCell(i, j, _field.hasBarrier(i, j));
+
+    _ship.setStartPosition(shipStartPosition);
+    _ship.setEndPosition(shipEndPosition);
+    updateShip();
 }
 
