@@ -39,6 +39,7 @@ class View : public Actor
         void nextMap();
 
         void destroyField();
+        void showError();
 
     private:
         IPresenter* _presenter;
@@ -46,6 +47,7 @@ class View : public Actor
         std::vector<std::vector<spCell>> _field;
         spTextField _modeButtonText;
         spButton _pathfindButton;
+        spSprite error;
 
         int _columns;
         int _rows;

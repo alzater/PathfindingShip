@@ -53,12 +53,14 @@ void FieldLoader::loadFieldNames()
 std::string FieldLoader::getNextFieldName()
 {
     if( _fieldNames.empty() )
-        return {};
+        return "";
+
+    const std::string& result = _fieldNames[_fieldNameIter];
 
     _fieldNameIter += 1;
 
     if( _fieldNameIter >= _fieldNames.size() )
         _fieldNameIter = 0;
 
-    return _fieldNames[_fieldNameIter];
+    return result;
 }
