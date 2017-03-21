@@ -3,8 +3,6 @@
 
 #include <cmath>
 
-#include <iostream>
-
 extern Resources gameResources;
 
 View::View(IPresenter* presenter)
@@ -223,8 +221,6 @@ void View::pathfinding()
                 angle += M_PI/2;
 
             tween->add(Actor::TweenRotation(angle), duration);
-
-            std::cout << angle << std::endl;
         }
 
         duration = 500;

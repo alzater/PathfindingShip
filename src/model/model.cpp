@@ -1,8 +1,6 @@
 // model.cpp
 #include "model.h"
 
-#include <iostream>
-
 Model::Model()
     : _field(1, 1)
     , _shipManager(_field)
@@ -78,27 +76,6 @@ bool Model::removeBarrier(int x, int y)
         return false;
 }
 
-void printPath(const std::vector<ShipManager::MOVEMENT>& path)
-{
-    std::cout << std::endl;
-
-    std::string res;
-    for( auto movement : path )
-    {
-        switch( movement )
-        {
-            case ShipManager::MOVEMENT::RIGHT: res = "right"; break;
-            case ShipManager::MOVEMENT::LEFT: res = "left"; break;
-            case ShipManager::MOVEMENT::UP: res = "up"; break;
-            case ShipManager::MOVEMENT::DOWN: res = "down"; break;
-            case ShipManager::MOVEMENT::ROTATE_RIGHT: res = "rotate_right"; break;
-            case ShipManager::MOVEMENT::ROTATE_LEFT: res = "rotate_left"; break;
-        }
-        std::cout << res << " ";
-    }
-    std::cout << std::endl;
-}
-
 std::vector<ShipManager::MOVEMENT> Model::getShipPath()
 {
     bool error = true;
@@ -106,7 +83,6 @@ std::vector<ShipManager::MOVEMENT> Model::getShipPath()
     if( error )
         return {};
 
-printPath(path);
     return path;
 }
 

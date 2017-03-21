@@ -2,8 +2,6 @@
 #ifndef MODEL_OBSERVER_H
 #define MODEL_OBSERVER_H
 
-#include <functional>
-
 class ModelObserver
 {
     public:

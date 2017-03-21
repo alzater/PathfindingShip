@@ -1,8 +1,6 @@
 // presenter.cpp
 #include "presenter.h"
 
-#include <iostream>
-
 Presenter::Presenter(spActor scene, std::pair<int, int> fieldSize)
     : _model()
     , _view(this)
@@ -91,7 +89,6 @@ void Presenter::nextMap()
 
 void Presenter::updatedCell(int x, int y, bool hasBarrier)
 {
-    std::cout << x << ' ' << y << std::endl;
     _view.setCell(x, y, hasBarrier);
 }
 
@@ -107,6 +104,5 @@ void Presenter::updatedShipEndPosition(int x, int y, bool isVertical)
 
 void Presenter::updatedField(int x, int y)
 {
-    std::cout << "f" << x << ' ' << y << std::endl;
     _view.initField(x, y);
 }

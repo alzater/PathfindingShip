@@ -2,7 +2,6 @@
 #include "field_loader.h"
 
 #include <fstream>
-#include <iostream>
 
 FieldLoader::FieldLoader()
 {
