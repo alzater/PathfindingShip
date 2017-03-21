@@ -47,7 +47,7 @@ class View : public Actor
         std::vector<std::vector<spCell>> _field;
         spTextField _modeButtonText;
         spButton _pathfindButton;
-        spSprite error;
+        spSprite _error;
 
         int _columns;
         int _rows;

@@ -201,7 +201,10 @@ void View::pathfinding()
 {
     const auto path = _presenter->getShipPath();
     if( path.empty() )
+    {
+        showError();
         return;
+    }
 
     spTweenQueue tween = new TweenQueue;
     float angle = 0;
@@ -246,4 +249,22 @@ void View::destroyField()
     for( auto& column : _field )
         for( auto& cell : column )
             cell->detach();
+}
+
+void View::showError()
+{
+    if( !_error )
+    {
+        _error = new Sprite;
+        _error->setResAnim( gameResources.getResAnim("error") );
+        _error->setPosition(650, 350);
+        addChild( _error );
+    }
+
+    spTweenQueue tween = new TweenQueue();
+    tween->add( TweenDummy(), 1000 );
+    tween->add( Sprite::TweenAlpha(0), 400);
+
+    _error->setAlpha(255);
+    _error->addTween( tween );
 }
