@@ -75,3 +75,8 @@ bool Ship::checkEndPosition() const
     else
         return true;
 }
+void Ship::clear()
+{
+    _startPosition = ShipManager::Position::illegal();
+    _endPosition = ShipManager::Position::illegal();
+}

@@ -162,6 +162,8 @@ ShipManager::Position Model::calcNewShipPosition(int x, int y)
 
 void Model::nextField()
 {
+    _ship.clear();
+
     _field = _fieldLoader.getNextField();
 
     _observer->updatedField( _field.getWidth(), _field.getHeight() );

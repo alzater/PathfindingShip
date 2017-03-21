@@ -21,6 +21,8 @@ class Ship
         bool checkStartPosition() const;
         bool checkEndPosition() const;
 
+        void clear();
+
     private:
         const ShipManager& _shipManager;
 
