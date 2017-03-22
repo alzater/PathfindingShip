@@ -28,7 +28,9 @@ class View : public Actor
         void initShips();
         void initButtons();
 
-        void cellClick(Event* e, int column, int row);
+        void onCellClick(Event* e, int column, int row);
+        void onKeyDown(Event* e);
+
         bool cellClickLeft(int column, int row);
         bool cellClickRight(int column, int row);
 

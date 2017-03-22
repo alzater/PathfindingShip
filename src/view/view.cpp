@@ -9,6 +9,8 @@ View::View(IPresenter* presenter)
     : _presenter(presenter)
 {
     initButtons();
+
+    oxygine::core::getDispatcher()->addEventListener(oxygine::core::EVENT_SYSTEM, CLOSURE(this, &View::onKeyDown));
 }
 
 View::~View()
@@ -49,7 +51,7 @@ void View::initField(int columns, int rows)
         {
             _field[i][j] = new Cell(_cellSize);
             _field[i][j]->setPosition(_cellSize * i, _cellSize * j);
-            _field[i][j]->addEventListener(TouchEvent::CLICK, [this, i, j](Event* e){ cellClick(e, i, j); });
+            _field[i][j]->addEventListener(TouchEvent::CLICK, [this, i, j](Event* e){ onCellClick(e, i, j); });
             addChild(_field[i][j]);
         }
     }
@@ -78,7 +80,7 @@ void View::initShips()
     addChild(_mainShip);
 }
 
-void View::cellClick(Event* e, int column, int row)
+void View::onCellClick(Event* e, int column, int row)
 {
     TouchEvent* event = dynamic_cast<TouchEvent*>(e);
     if( event == nullptr )
@@ -92,6 +94,16 @@ void View::cellClick(Event* e, int column, int row)
 
     if( !result )
         _field[column][row]->addTween(ColorRectSprite::TweenColor(Color(255, 0, 0)), 400, 1, true, Tween:: ease_outQuart);
+}
+
+void View::onKeyDown(Event* e)
+{
+    SDL_Event *event = (SDL_Event*)e->userData;
+    if (event->type != SDL_KEYDOWN)
+        return;
+
+    if( event->key.keysym.sym )
+        nextMap();
 }
 
 bool View::cellClickLeft(int column, int row)
