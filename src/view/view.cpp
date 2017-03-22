@@ -27,11 +27,17 @@ void View::setCell(int x, int y, bool hasBarrier)
 void View::setShipStartPosition(int x, int y, bool isVertical)
 {
     setShip(_startShipPosition, x, y, isVertical);
+
+    if( _showPath )
+        pathfinding();
 }
 
 void View::setShipEndPosition(int x, int y, bool isVertical)
 {
     setShip(_endShipPosition, x, y, isVertical);
+
+    if( _showPath )
+        pathfinding();
 }
 
 void View::initField(int columns, int rows)
@@ -196,8 +202,7 @@ void View::changeMode()
 
     if( _modifyMode )
     {
-        _mainShip->removeTweens();
-        _mainShip->setVisible(false);
+        stopShowPath();
 
         _modeButtonText->setText("Apply modify");
         _pathfindButton->setVisible(false);
@@ -211,6 +216,9 @@ void View::changeMode()
 
 void View::pathfinding()
 {
+    _showPath = true;
+    _mainShip->removeTweens();
+
     const auto path = _presenter->getShipPath();
     if( path.empty() )
     {
@@ -244,7 +252,6 @@ void View::pathfinding()
     tween->add(TweenDummy(), 2000);
     tween->setDoneCallback([this](Event*){pathfinding();});
 
-    _mainShip->removeTweens();
     _mainShip->setVisible(true);
     _mainShip->setRotation(0);
     _mainShip->setPosition( Vector2(_cellSize*((float)path[0].x+0.5f), _cellSize*((float)path[0].y+0.5f)));
@@ -253,6 +260,8 @@ void View::pathfinding()
 
 void View::nextMap()
 {
+    stopShowPath();
+
     _presenter->nextMap();
 }
 
@@ -269,7 +278,7 @@ void View::showError()
     {
         _error = new Sprite;
         _error->setResAnim( gameResources.getResAnim("error") );
-        _error->setPosition(650, 350);
+        _error->setPosition(650, 300);
         addChild( _error );
     }
 
@@ -279,4 +288,11 @@ void View::showError()
 
     _error->setAlpha(255);
     _error->addTween( tween );
+}
+
+void View::stopShowPath()
+{
+    _showPath = false;
+    _mainShip->setVisible(false);
+    _mainShip->removeTweens();
 }

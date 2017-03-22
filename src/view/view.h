@@ -35,10 +35,10 @@ class View : public Actor
         bool cellClickRight(int column, int row);
 
         void setShip(spActor ship, int column, int row, bool isVertical);
-
         void changeMode();
         void pathfinding();
         void nextMap();
+        void stopShowPath();
 
         void destroyField();
         void showError();
@@ -58,6 +58,7 @@ class View : public Actor
         const int MAX_HEIGHT = 600;
 
         bool _modifyMode = false;
+        bool _showPath = false;
 
         spShipView _mainShip;
         spShipPlace _startShipPosition;
