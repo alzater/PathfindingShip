@@ -1,8 +1,8 @@
 proj.cmake/build
+proj.emscripten/build
 test/build
 
 proj.android
-proj.emscripten
 proj.ios
 proj.macosx
 proj.win32
