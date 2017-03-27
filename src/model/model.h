@@ -24,9 +24,6 @@ class Model
         std::vector<ShipManager::MOVEMENT> getShipPath();
         std::tuple<int, int, bool> getShipStartPosition();
 
-        std::pair<int, int> getFieldSize();
-        bool hasBarrier(int x, int y);
-
         void nextField();
 
     private:

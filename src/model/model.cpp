@@ -93,14 +93,6 @@ std::tuple<int, int, bool> Model::getShipStartPosition()
     return std::make_tuple(pos.x, pos.y, (bool)pos.isVertical);
 }
 
-std::pair<int, int> Model::getFieldSize()
-{
-}
-
-bool Model::hasBarrier(int x, int y)
-{
-}
-
 void Model::updateShip()
 {
     if( _ship.updateStartPosition() && _observer != nullptr )
