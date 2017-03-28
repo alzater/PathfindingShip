@@ -21,6 +21,11 @@ std::tuple<Field, std::tuple<int, int, bool>, std::tuple<int, int, bool>>  Field
         config >> width >> height;
         field = Field(width, height);
 
+#ifdef EMSCRIPTEN
+        if( width > 20 || height > 20 )
+            return getNextField();
+#endif
+
         for( size_t i = 0; i < height; ++i )
         {
             for( size_t j = 0; j < width; ++j )

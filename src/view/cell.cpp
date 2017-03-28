@@ -8,11 +8,13 @@ Cell::Cell(float size)
     setSize(size, size);
     setColor( Color(0, 0, 240) );
 
+#ifndef EMSCRIPTEN
     spSprite sea = new Sprite;
     sea->setResAnim( gameResources.getResAnim("sea") );
     sea->setSize( getSize() * 0.9 );
     sea->setAnchor(-0.05, -0.05);
     addChild(sea);
+#endif
 }
 
 Cell::~Cell()
