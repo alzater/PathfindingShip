@@ -70,7 +70,11 @@ std::vector<ShipMove> Presenter::getShipPath()
                 case ShipManager::MOVEMENT::DOWN  : yPos += 1; break;
                 case ShipManager::MOVEMENT::RIGHT : xPos += 1; break;
                 case ShipManager::MOVEMENT::LEFT  : xPos -= 1; break;
+                default:
+                    assert(!"expected case");
+                    return {};
             }
+
             shipMove.type = ShipMove::Type::MOVE;
         }
         shipMove.x = xPos;
